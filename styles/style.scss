@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+@mixin flex($direction, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+body{
+    transition: all .5s ease;
+    overflow-x: hidden;
+    @include flex(column, flex-start, center);
+    .header{
+        @include flex(column, center, center);
+        background: rgb(177, 255, 177);
+        width: 100vw;
+        .logo{
+            font-size: 13vw;
+            padding: 2%;
+        }
+    }
+    .mainWrapper{
+        @include flex(column,flex-start,center);
+        // color: rgb(177, 255, 177);;
+    img{
+        width: 20vw;
+        margin:  10vw 0;
+        border-radius: 100px;
+    }
+
+}
+.repoCard{
+    border: 1px solid black;
+    margin: 5% 0;
+    padding: 0 5% 5% 0;
+    background: white;
+    @include flex(column, flex-start, flex-start);
+    width: 85vw;
+    box-shadow: 6px 5px 13px 0px rgba(0, 0, 0, 0.493);
+    .repoName{
+        font-size: 25px;
+        font-weight: 200;
+        margin: 3%;
+    }
+    .latestPush{
+        font-size: 15px;
+        font-weight: 100;
+        margin: 3%;
+    }
+    .linkBtn{
+        align-self: center;
+        margin: 3%;
+    }
+}
+}

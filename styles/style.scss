@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
+    ::-webkit-scrollbar {
+        display: none;
+      }
 }
 @mixin flex($direction, $justify, $align) {
     display: flex;
@@ -56,4 +59,6 @@ body{
         margin: 3%;
     }
 }
+
+
 }

@@ -6,6 +6,10 @@
   font-family: sans-serif;
 }
 
+* ::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   -webkit-transition: all .5s ease;
   transition: all .5s ease;

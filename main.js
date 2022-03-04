@@ -3,10 +3,51 @@ const headerWrapper = document.querySelector(".header")
 const mainWrapper = document.querySelector(".mainWrapper")
 const formSection = document.querySelector(".formSection")
 
+window.addEventListener("mouseover",(e)=>{
+    document.body.style.backgroundColor=`rgb(${e.screenY}, ${e.screenX}, 70)`
+
+})
 
 
 
+const allTheLinks = (data)=>{
+    const linkBtn = document.querySelectorAll(".linkBtn")
+    linkBtn.forEach(button =>{
+        button.addEventListener("click", ()=>{
+            let dataId = button.getAttribute("data-id") 
+            const rightBtn =  data.find(button =>{
+                return button.id == dataId
+            })
+           if(rightBtn){
+               location.href=rightBtn.html_url
+           }
+        })
+    })
 
+}
+
+let findBtn =(userInput)=>{
+    fetching(userInput.value)
+    }
+
+
+const fetching =async (user)=>{
+    await fetchGithub(user)
+    .then(data=>{
+            sort(data)
+            repoWrapper.innerHTML= data.map(cardComponent).join("")
+            mainWrapper.innerHTML= headerComponent(data)
+             allTheLinks(data)
+
+            let userInput = document.querySelector("#user")
+            const submitBtn = document.querySelector(".submitBtn")
+
+             submitBtn.addEventListener("click", ()=>{
+                findBtn(userInput)
+                    })
+    
+    })
+    }
 
 const sort = (items)=>{
     items.sort((a,b)=>{
@@ -43,12 +84,10 @@ const headerComponent = (data)=>`
     <input type="text" name="name" id="user">
     <button onclick="${() => {findBtn()}}" class="submitBtn">Find</button>
 `    
-
-
-
 fetchGithub("albinglindell")
 .then(data => {
     sort(data)
+    console.log(data)
 repoWrapper.innerHTML= data.map(cardComponent).join("")
 mainWrapper.innerHTML= headerComponent(data)
 
@@ -56,48 +95,13 @@ const submitBtn = document.querySelector(".submitBtn")
 let userInput = document.querySelector("#user")
 
 
-
 submitBtn.addEventListener("click", ()=>{
-findBtn()
+findBtn(userInput)
     })
 
 
-    let findBtn =()=>{
     
-        fetchGithub(userInput.value)
-        .then(data=>{
-            sort(data)
-            repoWrapper.innerHTML= data.map(cardComponent).join("")
-            mainWrapper.innerHTML= headerComponent(data)
-            })
-        }
 
-   
-
-
-
-
-
-
-
-window.addEventListener("mouseover",(e)=>{
-    document.body.style.backgroundColor=`rgb(${e.screenY}, ${e.screenX}, 70)`
-
-})
-
-
-
-const linkBtn = document.querySelectorAll(".linkBtn")
-linkBtn.forEach(button =>{
-    button.addEventListener("click", ()=>{
-        let dataId = button.getAttribute("data-id") 
-        const rightBtn =  data.find(button =>{
-            return button.id == dataId
-        })
-       if(rightBtn){
-           location.href=rightBtn.html_url
-       }
-    })
-})
+allTheLinks(data)
 })
 
